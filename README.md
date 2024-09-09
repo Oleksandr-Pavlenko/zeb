@@ -21,7 +21,7 @@ require authorisation. You can get a Bearer token valid for 15 minutes using the
 
 Submitting energy consumption data.
 
-`POST /api/energy/consumption`
+`POST /api/v1/energy/consumption`
 
 Example Request Body
 
