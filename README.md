@@ -23,7 +23,7 @@ Submitting energy consumption data.
 
 `POST /api/energy/consumption`
 
-пример запроса
+Example Request Body
 
 `[
 {
