@@ -38,14 +38,14 @@ public class EnergyConsumptionService {
         int nameCounter = 1;
 
         for (EnergyConsumptionRequestDto consumption : consumptionList) {
-            EnergySourceDto energySource = findEnergySourceById(consumption.getEnergySourceId(), energySources);
+            EnergySourceDto energySource = findEnergySourceById(consumption.energySourceId(), energySources);
             if (energySource == null) {
-                throw new IllegalArgumentException("Energy source with ID " + consumption.getEnergySourceId() + " not found.");
+                throw new IllegalArgumentException("Energy source with ID " + consumption.energySourceId() + " not found.");
             }
 
-            ScopeHierarchyDto subScope = findScopeById(energySource.getScopeId(), scopeHierarchy);
+            ScopeHierarchyDto subScope = findScopeById(energySource.scopeId(), scopeHierarchy);
             if (subScope == null) {
-                throw new IllegalArgumentException("Scope with ID " + energySource.getScopeId() + " not found.");
+                throw new IllegalArgumentException("Scope with ID " + energySource.scopeId() + " not found.");
             }
 
             EnergyConsumptionResponseDto consumptionData = calculateEnergyAndCO2(consumption, energySource, subScope, nameCounter++);
@@ -55,7 +55,7 @@ public class EnergyConsumptionService {
         // Add all subScope to their parent Scope
         for (Map.Entry<String, EnergyConsumptionResponseDto> entry : subScopeDataMap.entrySet()) {
             ScopeHierarchyDto subScope = findScopeById(entry.getKey(), scopeHierarchy);
-            ScopeHierarchyDto parentScope = findParentScope(subScope.getId(), scopeHierarchy);
+            ScopeHierarchyDto parentScope = findParentScope(subScope.id(), scopeHierarchy);
             if (parentScope != null) {
                 addSubScopeToParentScope(scopeDataMap, entry.getValue(), parentScope);
             }
@@ -65,15 +65,15 @@ public class EnergyConsumptionService {
     }
 
     private void addConsumptionDataToSubScope(Map<String, EnergyConsumptionResponseDto> subScopeDataMap,
-                                       ScopeHierarchyDto subScope,
-                                       EnergyConsumptionResponseDto resourceData) {
+                                              ScopeHierarchyDto subScope,
+                                              EnergyConsumptionResponseDto resourceData) {
         // Add subScope if it is not in the map
-        subScopeDataMap.computeIfAbsent(subScope.getId(), id ->
-                new EnergyConsumptionResponseDto(subScope.getName(), subScope.getLabel(), BigDecimal.ZERO, BigDecimal.ZERO, new ArrayList<>())
+        subScopeDataMap.computeIfAbsent(subScope.id(), id ->
+                new EnergyConsumptionResponseDto(subScope.name(), subScope.label(), BigDecimal.ZERO, BigDecimal.ZERO, new ArrayList<>())
         );
 
         // Add a resourceData to a child element of the subcategory and summarize the data
-        EnergyConsumptionResponseDto subScopeDto = subScopeDataMap.get(subScope.getId());
+        EnergyConsumptionResponseDto subScopeDto = subScopeDataMap.get(subScope.id());
         subScopeDto.getChildren().add(resourceData);
         subScopeDto.setEnergy(subScopeDto.getEnergy().add(resourceData.getEnergy()));
         subScopeDto.setCo2(subScopeDto.getCo2().add(resourceData.getCo2()));
@@ -83,12 +83,12 @@ public class EnergyConsumptionService {
                                           EnergyConsumptionResponseDto subScopeDto,
                                           ScopeHierarchyDto parentScope) {
         // Add a parent Scope if it doesn’t exist
-        scopeDataMap.computeIfAbsent(parentScope.getId(), id ->
-                new EnergyConsumptionResponseDto(parentScope.getName(), parentScope.getLabel(), BigDecimal.ZERO, BigDecimal.ZERO, new ArrayList<>())
+        scopeDataMap.computeIfAbsent(parentScope.id(), id ->
+                new EnergyConsumptionResponseDto(parentScope.name(), parentScope.label(), BigDecimal.ZERO, BigDecimal.ZERO, new ArrayList<>())
         );
 
         // Summarize the subcategory data into the parent Scope (second layer)
-        EnergyConsumptionResponseDto parentScopeDto = scopeDataMap.get(parentScope.getId());
+        EnergyConsumptionResponseDto parentScopeDto = scopeDataMap.get(parentScope.id());
         parentScopeDto.setEnergy(parentScopeDto.getEnergy().add(subScopeDto.getEnergy()));
         parentScopeDto.setCo2(parentScopeDto.getCo2().add(subScopeDto.getCo2()));
 
@@ -99,23 +99,23 @@ public class EnergyConsumptionService {
     }
 
     private EnergyConsumptionResponseDto calculateEnergyAndCO2(EnergyConsumptionRequestDto consumption, EnergySourceDto energySource, ScopeHierarchyDto scope, int resourceCounter) {
-        BigDecimal energyInKwh = consumption.getEnergyConsumption().multiply(energySource.getConversionFactor());
-        BigDecimal emissionFactor = consumption.getEmissionFactor() != null ? consumption.getEmissionFactor() : energySource.getEmissionFactor();
+        BigDecimal energyInKwh = consumption.energyConsumption().multiply(energySource.conversionFactor());
+        BigDecimal emissionFactor = consumption.emissionFactor() != null ? consumption.emissionFactor() : energySource.emissionFactor();
         BigDecimal co2Emissions = energyInKwh.multiply(emissionFactor).divide(BigDecimal.valueOf(1000), RoundingMode.HALF_UP);
 
         energyInKwh = energyInKwh.setScale(2, RoundingMode.HALF_UP);
         co2Emissions = co2Emissions.setScale(2, RoundingMode.HALF_UP);
 
-        String resourceName = scope.getName() + "." + resourceCounter;
+        String resourceName = scope.name() + "." + resourceCounter;
         //resourceLabel for 3rd level
-        String resourceLabel = energySource.getName() + " (" + consumption.getDescription() + ")";
+        String resourceLabel = energySource.name() + " (" + consumption.description() + ")";
 
         return new EnergyConsumptionResponseDto(resourceName, resourceLabel, energyInKwh, co2Emissions, new ArrayList<>());
     }
 
     private EnergySourceDto findEnergySourceById(String energySourceId, EnergySourceDto[] energySources) {
         for (EnergySourceDto source : energySources) {
-            if (source.getEnergySourceId().equals(energySourceId)) {
+            if (source.energySourceId().equals(energySourceId)) {
                 return source;
             }
         }
@@ -124,8 +124,8 @@ public class EnergyConsumptionService {
 
     private ScopeHierarchyDto findScopeById(String scopeId, ScopeHierarchyDto[] scopeHierarchy) {
         for (ScopeHierarchyDto scope : scopeHierarchy) {
-            for (ScopeHierarchyDto subScope : scope.getSubScopes()) {
-                if (subScope.getId().equals(scopeId)) {
+            for (ScopeHierarchyDto subScope : scope.subScopes()) {
+                if (subScope.id().equals(scopeId)) {
                     return subScope;
                 }
             }
@@ -137,7 +137,7 @@ public class EnergyConsumptionService {
         String parentScopeId = scopeId.substring(0, scopeId.lastIndexOf('_'));
 
         for (ScopeHierarchyDto scope : scopeHierarchy) {
-            if (scope.getId().equals(parentScopeId)) {
+            if (scope.id().equals(parentScopeId)) {
                 return scope;
             }
         }
