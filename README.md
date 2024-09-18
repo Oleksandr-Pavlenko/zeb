@@ -14,10 +14,6 @@ Customers can send energy consumption data to get CO2 emission calculation.
    docker run -d -p 8080:8080 zeb-app
 
 ## Functionality
-You will need a Bearer token to access the API. For ease of testing, an endpoint has been created that does not 
-require authorisation. You can get a Bearer token valid for 15 minutes using the following endpoint:
-
-`GET /api/auth/token`
 
 Submitting energy consumption data.
 
