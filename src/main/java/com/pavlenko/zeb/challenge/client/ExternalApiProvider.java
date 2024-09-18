@@ -1,7 +1,7 @@
-package com.pavlenko.zeb.challenge.task1.client;
+package com.pavlenko.zeb.challenge.client;
 
-import com.pavlenko.zeb.challenge.task1.dto.EnergySourceDto;
-import com.pavlenko.zeb.challenge.task1.dto.ScopeHierarchyDto;
+import com.pavlenko.zeb.challenge.dto.EnergySourceDto;
+import com.pavlenko.zeb.challenge.dto.ScopeHierarchyDto;
 import org.springframework.stereotype.Component;
 
 @Component

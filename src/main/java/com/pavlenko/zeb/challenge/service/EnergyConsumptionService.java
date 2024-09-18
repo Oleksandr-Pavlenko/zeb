@@ -1,9 +1,9 @@
-package com.pavlenko.zeb.challenge.task1.service;
+package com.pavlenko.zeb.challenge.service;
 
-import com.pavlenko.zeb.challenge.task1.dto.EnergyConsumptionResponseDto;
-import com.pavlenko.zeb.challenge.task1.dto.EnergyConsumptionRequestDto;
-import com.pavlenko.zeb.challenge.task1.dto.EnergySourceDto;
-import com.pavlenko.zeb.challenge.task1.dto.ScopeHierarchyDto;
+import com.pavlenko.zeb.challenge.dto.EnergyConsumptionResponseDto;
+import com.pavlenko.zeb.challenge.dto.EnergyConsumptionRequestDto;
+import com.pavlenko.zeb.challenge.dto.EnergySourceDto;
+import com.pavlenko.zeb.challenge.dto.ScopeHierarchyDto;
 import org.springframework.stereotype.Service;
 
 import java.util.*;

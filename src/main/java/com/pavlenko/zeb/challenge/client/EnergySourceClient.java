@@ -1,6 +1,6 @@
-package com.pavlenko.zeb.challenge.task1.client;
+package com.pavlenko.zeb.challenge.client;
 
-import com.pavlenko.zeb.challenge.task1.dto.EnergySourceDto;
+import com.pavlenko.zeb.challenge.dto.EnergySourceDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
