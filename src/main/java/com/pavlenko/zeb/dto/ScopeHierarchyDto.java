@@ -1,4 +1,4 @@
-package com.pavlenko.zeb.challenge.dto;
+package com.pavlenko.zeb.dto;
 
 import java.util.List;
 

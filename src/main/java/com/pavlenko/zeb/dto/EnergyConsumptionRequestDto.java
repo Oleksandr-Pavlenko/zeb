@@ -1,4 +1,4 @@
-package com.pavlenko.zeb.challenge.dto;
+package com.pavlenko.zeb.dto;
 
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;

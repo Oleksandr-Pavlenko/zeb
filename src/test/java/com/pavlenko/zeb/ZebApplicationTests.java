@@ -1,4 +1,4 @@
-package com.pavlenko.zeb.challenge;
+package com.pavlenko.zeb;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

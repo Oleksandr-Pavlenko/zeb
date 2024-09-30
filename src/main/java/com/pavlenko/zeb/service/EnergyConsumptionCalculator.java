@@ -1,7 +1,7 @@
-package com.pavlenko.zeb.challenge.service;
+package com.pavlenko.zeb.service;
 
-import com.pavlenko.zeb.challenge.dto.EnergyConsumptionRequestDto;
-import com.pavlenko.zeb.challenge.dto.EnergySourceDto;
+import com.pavlenko.zeb.dto.EnergyConsumptionRequestDto;
+import com.pavlenko.zeb.dto.EnergySourceDto;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;

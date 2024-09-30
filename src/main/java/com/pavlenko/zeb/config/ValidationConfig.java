@@ -1,4 +1,4 @@
-package com.pavlenko.zeb.challenge.config;
+package com.pavlenko.zeb.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

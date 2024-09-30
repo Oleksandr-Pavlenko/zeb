@@ -1,6 +1,6 @@
-package com.pavlenko.zeb.challenge.client;
+package com.pavlenko.zeb.client;
 
-import com.pavlenko.zeb.challenge.dto.ScopeHierarchyDto;
+import com.pavlenko.zeb.dto.ScopeHierarchyDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;

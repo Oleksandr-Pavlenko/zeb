@@ -1,8 +1,8 @@
-package com.pavlenko.zeb.challenge.service;
+package com.pavlenko.zeb.service;
 
-import com.pavlenko.zeb.challenge.client.ExternalApiProvider;
-import com.pavlenko.zeb.challenge.dto.EnergySourceDto;
-import com.pavlenko.zeb.challenge.dto.ScopeHierarchyDto;
+import com.pavlenko.zeb.client.ExternalApiProvider;
+import com.pavlenko.zeb.dto.EnergySourceDto;
+import com.pavlenko.zeb.dto.ScopeHierarchyDto;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;

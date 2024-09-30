@@ -1,4 +1,4 @@
-package com.pavlenko.zeb.challenge;
+package com.pavlenko.zeb;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

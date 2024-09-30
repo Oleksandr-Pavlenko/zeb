@@ -1,8 +1,8 @@
-package com.pavlenko.zeb.challenge.controller;
+package com.pavlenko.zeb.controller;
 
-import com.pavlenko.zeb.challenge.dto.EnergyConsumptionRequestDto;
-import com.pavlenko.zeb.challenge.service.EnergyConsumptionService;
-import com.pavlenko.zeb.challenge.dto.EnergyConsumptionResponseDto;
+import com.pavlenko.zeb.dto.EnergyConsumptionRequestDto;
+import com.pavlenko.zeb.service.EnergyConsumptionService;
+import com.pavlenko.zeb.dto.EnergyConsumptionResponseDto;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
